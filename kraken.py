@@ -200,9 +200,6 @@ def etcd_test(label, master_label):
     print (Fore.YELLOW + 'killing %s\n') %(leader_node)
     #cmd = "pkill etcd"
     # For OCP 3.10: we have static pods:
-    # This is for restart:
-    # cmd = "/usr/local/lib/master-restart etcd"
-    ## cmd = "systemctl stop etcd"
     cmd = "cp /etc/origin/node/pods/etcd.yaml /root/etcd.yaml_ORIG; mv /etc/origin/node/pods/etcd.yaml /root/etcd.yaml"
     print ( Fore.YELLOW + '%s is the leader_node\n') %(leader_node)
 
@@ -275,12 +272,7 @@ def master_test(label, master_label):
     # pick random node to kill
     master_node = get_random_node(master_label)
     print (Fore.GREEN + 'killing %s\n') %(master_node)
-    #cmd = "systemctl stop atomic-openshift-master-controllers.service"
-    ##cmd = "systemctl stop atomic-openshift-master-apiserver.service"
     # For OCP 3.10: we have static pods:
-    # This is for restart:
-    # cmd = "/usr/local/lib/master-restart api"
-    # cmd = "/usr/local/lib/master-restart controllers"
     cmd = "cp /etc/origin/node/pods/apiserver.yaml /root/apiserver.yaml_ORIG; cp /etc/origin/node/pods/controller.yaml /root/controller.yaml_ORIG; mv /etc/origin/node/pods/apiserver.yaml /root/apiserver.yaml; mv /etc/origin/node/pods/controller.yaml /root/controller.yaml"
     subprocess.Popen(["ssh", "%s" % master_node, cmd],
                        shell=False,

@@ -37,8 +37,8 @@ Kraken kills the leader and checks:
 
 ### Label master, worker nodes
 - Master node needs to be labeled with node_type=master so that the tool doesn't delete the master which will cause problems when we don't have a high availability cluster.
-- Worker nodes needs to be labeled with node_type=kraken, kraken looks for that label when picking up the random node to delete.
-- Make sure to label the master nodes with node_type=kraken in case you want to run master and etcd failure tests.
+- Worker nodes needs to be labeled with type=kraken, kraken looks for that label when picking up the random node to delete.
+- Make sure to label the master nodes with type=kraken in case you want to run master and etcd failure tests.
 
 The labeling can be done by using the openshift-labeler playbook present in the repo or using the oc client like:
 ```
